@@ -1,39 +1,1564 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			href="./favicon-96x96.png"
+			sizes="96x96"
+		/>
+		<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+		<link rel="shortcut icon" href="./favicon.ico" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="./apple-touch-icon.png"
+		/>
+		<meta name="apple-mobile-web-app-title" content="SVG" />
+		<link rel="manifest" href="./site.webmanifest" />
+		<title>SVG</title>
 
-		<title>reveal.js</title>
+		<link rel="stylesheet" href="./dist/reset.css" />
+		<link rel="stylesheet" href="./dist/reveal.css" />
+		<link rel="stylesheet" href="./dist/theme/black.css" id="theme" />
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="./plugin/highlight/monokai.css" />
+		<link rel="stylesheet" href="./css/custom.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<style>
+			/* --- Встроенные стили --- */
+			.reveal section svg {
+				max-height: 400px;
+				margin: 15px auto;
+				margin-top: 0;
+				display: block;
+			}
+			.reveal section .small-svg svg {
+				max-height: 250px;
+				margin: 10px auto;
+			}
+			.reveal .code-side {
+				display: flex;
+				align-items: flex-start;
+				gap: 20px;
+			}
+			.reveal .code-side pre,
+			.reveal .code-side .code-block {
+				flex-basis: 50%;
+				margin: 0 !important;
+				font-size: 0.65em !important;
+				max-height: 480px;
+				overflow-y: auto !important;
+			}
+			.reveal .code-side .visual-side {
+				flex-basis: 50%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				min-height: 300px;
+			}
+			.reveal .code-side .visual-side svg {
+				border: 1px solid cyan;
+				max-width: 100%;
+				margin-bottom: 10px;
+			}
+			.reveal .code-side .visual-side p {
+				font-size: 0.6em;
+				color: lightgray;
+				margin-top: 5px;
+			}
+			.reveal .reasons-list li {
+				margin-bottom: 10px;
+			}
+			.reveal .reasons-list strong {
+				color: #42affa;
+			}
+			code {
+				background-color: rgba(255, 255, 255, 0.1);
+				padding: 0.1em 0.3em;
+				border-radius: 3px;
+				font-family: monospace;
+			}
+			pre code {
+				padding: 0;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<!-- == Section 1: Introduction == -->
+				<section>
+					<!-- Slide 1.1: Title -->
+					<section>
+						<h1>SVG</h1>
+						<p>Vector Graphics Magic on the Web ✨</p>
+						<p>
+							<small>Sudorgin Daniil</small>
+						</p>
+						<aside class="notes">
+							Hi everyone! Ever wondered how some graphics on the
+							web stay perfectly sharp no matter how much you zoom
+							in? Or how icons change color instantly? Chances
+							are, you've encountered SVG, Scalable Vector
+							Graphics. Today, we'll dive into what SVG is, why
+							it's awesome (mostly!), how to use it, draw basic
+							shapes, make it accessible, and even add a little
+							sparkle with animations. Let's get started!
+						</aside>
+					</section>
+
+					<!-- Slide 1.2: What is SVG? -->
+					<section>
+						<h2>What is SVG?</h2>
+						<ul>
+							<li>
+								Stands for <strong>S</strong>calable
+								<strong>V</strong>ector
+								<strong>G</strong>raphics
+							</li>
+							<li>
+								It's basically
+								<strong>HTML for drawings</strong> (XML-based)
+							</li>
+							<li>
+								Describes images using shapes, paths, text (not
+								pixels!)
+							</li>
+							<li>
+								Scales infinitely without quality loss (say
+								goodbye to blurriness!)
+							</li>
+							<li>
+								Can be styled with <strong>CSS</strong> &
+								manipulated with <strong>JavaScript</strong>
+							</li>
+							<li>
+								It's a <strong>W3C Standard</strong> (means it's
+								official and works everywhere)
+							</li>
+						</ul>
+						<aside class="notes">
+							So, what's the big deal? SVG stands for Scalable
+							Vector Graphics. Think of it like this: HTML uses
+							tags to structure text and content; SVG uses tags to
+							structure drawings. It's based on XML, which looks
+							similar to HTML. Instead of defining images pixel by
+							pixel like JPEGs or PNGs, SVG describes shapes
+							mathematically - "draw a circle here", "draw a line
+							from this point to that point". The magic word is
+							"Scalable". You can resize an SVG image to be tiny
+							or billboard-sized, and it will *always* look
+							perfectly crisp. No pixelation! Plus, because it's
+							just text code, we can easily style it with CSS
+							(change colors, sizes) and interact with it using
+							JavaScript (make things happen on click, etc.). It's
+							a proper web standard, supported by all modern
+							browsers. (Fragment shows a crude pixel
+							representation vs a smooth vector circle).
+						</aside>
+					</section>
+
+					<!-- Slide 1.3: Why SVG? -->
+					<section>
+						<h2>Why Use SVG? 🤔</h2>
+						<ul class="reasons-list">
+							<li class="fragment">
+								✅ <strong>Scalable & Responsive:</strong> Looks
+								sharp on any screen.
+							</li>
+							<li class="fragment">
+								✅ <strong>Lightweight:</strong> Often smaller
+								file sizes than raster images.
+							</li>
+							<li class="fragment">
+								✅ <strong>CSS Styling:</strong> Change colors,
+								strokes, opacity, even animate with CSS! Easy
+								theming.
+							</li>
+							<li class="fragment">
+								✅ <strong>DOM Interaction:</strong> SVG
+								elements are part of the DOM. Add event
+								listeners with JS.
+							</li>
+							<li class="fragment">
+								✅ <strong>Accessibility:</strong> It's text!
+								Can include titles/descriptions for screen
+								readers.
+							</li>
+							<li class="fragment">
+								✅ <strong>SEO Friendly:</strong> Text content
+								inside SVG can be indexed by search engines.
+							</li>
+							<li class="fragment">
+								✅ <strong>No HTTP Request (Inline):</strong> If
+								embedded directly in HTML, no extra server trip
+								needed.
+							</li>
+						</ul>
+						<aside class="notes">
+							Okay, sounds cool, but *why* should you actually use
+							it? First, Scalability is king. Perfect sharpness on
+							all devices, big or small. Future-proof! Often, SVG
+							files are smaller than PNGs or GIFs for the same
+							graphic, saving bandwidth and loading time. Styling
+							with CSS is a huge win. Need to change the color of
+							all your icons for dark mode? Easy! It integrates
+							perfectly with JavaScript. You can make interactive
+							graphics or data visualizations. Being text-based
+							makes it accessible. Screen readers can announce
+							what the graphic represents. Search engines can
+							potentially index text within SVGs. And if you put
+							the SVG code directly into your HTML (inline SVG),
+							the browser doesn't need to fetch a separate file,
+							which can speed things up slightly. It's great for
+							logos, icons, illustrations, charts... basically
+							anything that isn't a complex photograph.
+						</aside>
+					</section>
+
+					<!-- Slide 1.4: When NOT SVG? -->
+					<section>
+						<h2>Okay, But When Maybe Not? 😬</h2>
+						<ul>
+							<li class="fragment" data-fragment-index="1">
+								🤯
+								<strong>Very Complex Graphics:</strong>
+								Thousands of elements can become slow to render
+								(think ultra-detailed illustrations or complex
+								CAD drawings).
+							</li>
+							<li class="fragment">
+								📸 <strong>Photorealistic Images:</strong> SVG
+								is not meant for photos. Use JPG/PNG/WebP for
+								that.
+							</li>
+							<li class="fragment">
+								👴 <strong>Ancient Browsers:</strong> Internet
+								Explorer 8 and older... need fallbacks (but who
+								supports IE8 now? 👻).
+							</li>
+						</ul>
+						<p
+							class="fragment"
+							style="margin-top: 20px; font-style: italic"
+						>
+							Basically: Use the right tool for the job!
+						</p>
+						<div class="fragment small-svg" data-fragment-index="1">
+							<svg viewBox="0 0 100 50">
+								<path
+									fill="red"
+									d="M10 45 L12 35 L14 45 L16 35 L18 45 L20 35 L22 45 L24 35 L26 45 L28 35 L30 45 L32 35 L34 45 L36 35 L38 45 L40 35 L42 45 L44 35 L46 45 L48 35 L50 45 L52 35 L54 45 L56 35 L58 45 L60 35 L62 45 L64 35 L66 45 L68 35 L70 45 L72 35 L74 45 L76 35 L78 45 L80 35 L82 45 L84 35 L86 45 L88 35 L90 45 Z"
+								/>
+								<text
+									x="50"
+									y="20"
+									text-anchor="middle"
+									font-size="6"
+									fill="white"
+								>
+									Super complex SVG... maybe slow?
+								</text>
+							</svg>
+						</div>
+						<aside class="notes">
+							Let's be fair, SVG isn't a silver bullet for
+							*everything*. If you have an incredibly complex SVG
+							with thousands and thousands of points and shapes,
+							the browser might struggle to render it smoothly,
+							especially during animations. Performance can become
+							an issue. It's absolutely terrible for photographs.
+							Vector graphics just can't represent that level of
+							detail efficiently. Stick to raster formats like
+							JPEG or WebP for photos. And while browser support
+							is fantastic now, if you *really* need to support
+							dinosaurs like IE8... well, first, my condolences,
+							and second, you'd need image fallbacks. But
+							honestly, this is rarely a concern today. The key
+							takeaway is: choose the right format for the
+							content. Logos, icons, charts? SVG! Photos?
+							JPEG/WebP.
+						</aside>
+					</section>
+				</section>
+				<!-- End of Section 1 -->
+
+				<!-- == Section 2: How to Use SVG == -->
+				<section>
+					<!-- Slide 2.1: Ways to Use SVG -->
+					<section>
+						<h2>How to Use SVG on a Page?</h2>
+						<p>Several ways, each with pros & cons:</p>
+						<ol>
+							<li class="fragment">
+								<strong
+									>Inline <code>&lt;svg&gt;</code>:</strong
+								>
+								<strong style="color: lime"
+									>(Most control: CSS/JS!)</strong
+								>
+							</li>
+							<li class="fragment">
+								<strong
+									>Image Tag <code>&lt;img&gt;</code>:</strong
+								>
+								<strong style="color: orange"
+									>(Easiest, less control)</strong
+								>
+							</li>
+							<li class="fragment">
+								<strong
+									>Object Tag
+									<code>&lt;object&gt;</code>:</strong
+								>
+								<strong style="color: yellow"
+									>(Fallback option, some control)</strong
+								>
+							</li>
+							<li class="fragment">
+								<strong>CSS Background:</strong>
+								<strong style="color: cyan"
+									>(For decoration)</strong
+								>
+							</li>
+						</ol>
+						<pre
+							class="fragment"
+							style="font-size: 0.7em"
+						><code data-trim class="html">
+                        <!-- 1. Inline SVG (👍 We'll use this most today) -->
+                        &lt;svg viewBox="0 0 100 100"&gt; &lt;circle cx="50" cy="50" r="40" fill="blue" /&gt; &lt;/svg&gt;
+
+                        <!-- 2. Image Tag -->
+                        &lt;img src="logo.svg" alt="My Logo"&gt;
+
+                        <!-- 3. Object Tag -->
+                        &lt;object type="image/svg+xml" data="icon.svg"&gt;
+                          &lt;img src="icon.png" alt="Icon"&gt; &lt;!-- Fallback --&gt;
+                        &lt;/object&gt;
+
+                        <!-- 4. CSS Background -->
+                        <style> .my-element { background: url(pattern.svg); } </style>
+                    </code></pre>
+						<aside class="notes">
+							Alright, how do we actually get SVG onto our web
+							page? There are four main ways. First, **Inline
+							SVG**: You literally copy the SVG code and paste it
+							right into your HTML file. This is often the best
+							method if you want to style internal parts of the
+							SVG with CSS or manipulate it with JavaScript,
+							because the SVG becomes part of the page's structure
+							(the DOM). Second, the good old **`&lt;img&gt;`
+							tag**: Just point the `src` attribute to your `.svg`
+							file. Super simple, works like any other image. The
+							downside? You can't easily style the *inside* of the
+							SVG using CSS from your main stylesheet. It's
+							treated like a black box. Third, the
+							**`&lt;object&gt;` tag**: This is a bit more
+							versatile than `&lt;img&gt;`. It allows for
+							fallbacks (showing a PNG if SVG isn't supported,
+							though that's rare now) and *can* allow some
+							interaction with JavaScript, though it's often more
+							complex than inline SVG. Fourth, **CSS
+							Backgrounds**: You can use an SVG file in your CSS
+							`background-image` property, just like a PNG or JPG.
+							Great for repeating patterns or simple decorative
+							icons. For today's demo, focusing on shapes and
+							animation, inline SVG gives us the most power.
+						</aside>
+					</section>
+
+					<!-- Slide 2.2: Coordinates & ViewBox -->
+					<section>
+						<h2>Coordinates & The Mighty `viewBox`</h2>
+						<ul>
+							<li>
+								Grid system: Origin (0,0) is
+								<strong>TOP-LEFT</strong> corner.
+							</li>
+							<li>
+								X increases right ➡️, Y increases
+								<strong>DOWN</strong> ⬇️
+							</li>
+							<li>
+								<code>viewBox="min-x min-y width height"</code>:
+								Defines the internal coordinate system. Think of
+								it as the "window" onto your drawing.
+							</li>
+							<li>
+								<code>width</code> & <code>height</code> on
+								<code>&lt;svg&gt;</code>: Define the actual
+								display size on the page.
+							</li>
+						</ul>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <!-- Draws in a 100x100 internal grid -->
+                        <svg viewBox="0 0 100 100"
+                             width="200" height="100" >
+                             <!-- Blue rect fills the viewBox -->
+                            <rect width="100" height="100" fill="blue" />
+                            <!-- Red circle centered in viewBox -->
+                            <circle cx="50" cy="50" r="25" fill="red"/>
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg
+									viewBox="0 0 100 100"
+									width="250"
+									height="250"
+									style="
+										border: 1px solid white;
+										margin-top: 0;
+									"
+								>
+									<line
+										x1="0"
+										y1="0"
+										x2="100"
+										y2="0"
+										stroke="gray"
+										stroke-width="0.5"
+									/>
+									<line
+										x1="0"
+										y1="0"
+										x2="0"
+										y2="100"
+										stroke="gray"
+										stroke-width="0.5"
+									/>
+									<text
+										x="50"
+										y="10"
+										font-size="8"
+										fill="white"
+										text-anchor="middle"
+									>
+										X+
+									</text>
+									<text
+										x="10"
+										y="50"
+										font-size="8"
+										fill="white"
+										dominant-baseline="middle"
+									>
+										Y+
+									</text>
+									<circle cx="0" cy="0" r="2" fill="yellow" />
+									<text
+										x="5"
+										y="10"
+										font-size="6"
+										fill="yellow"
+									>
+										(0,0)
+									</text>
+									<rect
+										width="100"
+										height="100"
+										fill="rgba(0,0,255,0.5)"
+									/>
+									<circle
+										cx="50"
+										cy="50"
+										r="25"
+										fill="rgba(255,0,0,0.7)"
+									/>
+									<circle cx="70" cy="30" r="3" fill="lime" />
+									<text
+										x="72"
+										y="28"
+										font-size="6"
+										fill="lime"
+									>
+										(70,30)
+									</text>
+								</svg>
+								<p>
+									(viewBox="0 0 100 100", displayed at
+									width="250" height="250")
+								</p>
+							</div>
+						</div>
+						<aside class="notes">
+							Now, how do we actually position things? SVG uses a
+							coordinate grid. Crucially, unlike your school math
+							graphs, the starting point (0,0) is in the
+							**TOP-LEFT** corner. X increases to the right, as
+							expected. But Y increases **DOWNWARDS**. This trips
+							up beginners sometimes! The `viewBox` attribute is
+							super important. It defines the fundamental
+							coordinate space of your drawing. `viewBox="0 0 100
+							100"` means "My drawing area goes from x=0 to x=100,
+							and y=0 to y=100". All coordinates inside this SVG
+							will be relative to this 100x100 box. The `width`
+							and `height` attributes on the main `&lt;svg&gt;`
+							tag then tell the browser how big to actually
+							*display* this viewBox on the page. In this example,
+							we define a 100x100 internal space (`viewBox`), but
+							tell the browser to render it at 250 pixels wide and
+							250 pixels high. The browser automatically scales
+							the content defined in the viewBox to fit. The blue
+							rectangle fills the entire viewBox, and the red
+							circle is centered within it. The green dot is at
+							(70, 30) *within the viewBox coordinate system*.
+						</aside>
+					</section>
+				</section>
+				<!-- End of Section 2 -->
+
+				<!-- == Section 3: Basic Shapes == -->
+				<section>
+					<!-- Slide 3.1: Intro to Shapes -->
+					<section>
+						<h2>Let's Draw! Basic Shapes</h2>
+						<p>SVG gives us simple tags for common shapes.</p>
+						<svg viewBox="0 0 200 50">
+							<rect
+								x="10"
+								y="10"
+								width="30"
+								height="30"
+								rx="5"
+								ry="5"
+								fill="orange"
+							/>
+							<circle cx="65" cy="25" r="15" fill="red" />
+							<ellipse
+								cx="115"
+								cy="25"
+								rx="20"
+								ry="10"
+								fill="purple"
+							/>
+							<line
+								x1="145"
+								y1="10"
+								x2="175"
+								y2="40"
+								stroke="lime"
+								stroke-width="2"
+							/>
+							<polygon
+								points="180 10, 195 25, 180 40"
+								fill="cyan"
+							/>
+						</svg>
+						<aside class="notes">
+							Alright, let's get to the fun part – drawing! SVG
+							provides specific tags for creating basic geometric
+							shapes. We'll look at the most common ones now. I've
+							put each shape on its own vertical slide, so just
+							press the down arrow to cycle through them.
+						</aside>
+					</section>
+
+					<!-- Slide 3.2: Rectangle -->
+					<section>
+						<h2>Shape: <code>&lt;rect&gt;</code> (Rectangle)</h2>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 60">
+                          <rect
+                            x="10"        
+                            y="10"      
+                            width="80"    
+                            height="40"   
+                            fill="orange" 
+                            stroke="black"
+                            stroke-width="2" />
+
+                          <!-- Optional: Rounded corners -->
+                          <rect x="25" y="20" width="50" height="20"
+                            rx="5" ry="5"
+                            fill="rgba(255,255,255,0.7)" />
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 60">
+									<rect
+										x="10"
+										y="10"
+										width="80"
+										height="40"
+										fill="orange"
+										stroke="black"
+										stroke-width="2"
+									/>
+									<rect
+										x="25"
+										y="20"
+										width="50"
+										height="20"
+										rx="5"
+										ry="5"
+										fill="rgba(255,255,255,0.7)"
+									/>
+								</svg>
+							</div>
+						</div>
+						<aside class="notes">
+							First up, the humble rectangle, using the
+							`&lt;rect&gt;` tag. You define its position with `x`
+							and `y` for the top-left corner coordinates. `width`
+							and `height` set its dimensions. Simple enough.
+							`fill` is the interior color, `stroke` is the
+							outline color, and `stroke-width` is how thick that
+							outline is. Bonus: you can make rounded corners
+							using `rx` (horizontal radius) and `ry` (vertical
+							radius). If you only specify `rx`, `ry` defaults to
+							the same value. Here, we have an orange rectangle
+							with a black border, and a smaller, semi-transparent
+							white one with rounded corners inside.
+						</aside>
+					</section>
+
+					<!-- Slide 3.3: Circle -->
+					<section>
+						<h2>Shape: <code>&lt;circle&gt;</code></h2>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 50">
+                          <circle
+                            cx="50"     
+                            cy="25"      
+                            r="20"        
+                            fill="red"
+                            stroke="white"
+                            stroke-width="1" />
+                           <circle cx="80" cy="35" r="10" fill="rgba(255,255,255,0.7)" />
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 50">
+									<circle
+										cx="50"
+										cy="25"
+										r="20"
+										fill="red"
+										stroke="white"
+										stroke-width="1"
+									/>
+									<circle
+										cx="80"
+										cy="35"
+										r="10"
+										fill="rgba(255,255,255,0.7)"
+									/>
+								</svg>
+							</div>
+						</div>
+						<aside class="notes">
+							Next, the circle, using `&lt;circle&gt;`. This one
+							is defined by its center point and radius. `cx` and
+							`cy` specify the coordinates of the circle's center.
+							Remember, (0,0) is top-left! `r` specifies the
+							radius. Again, you can use `fill`, `stroke`,
+							`stroke-width`, etc. Here's a red circle with a
+							white outline, and a smaller white-ish one.
+						</aside>
+					</section>
+
+					<!-- Slide 3.4: Ellipse -->
+					<section>
+						<h2>Shape: <code>&lt;ellipse&gt;</code></h2>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 50">
+                          <ellipse
+                            cx="50"      
+                            cy="25"       
+                            rx="40"      
+                            ry="20"     
+                            fill="purple" />
+                          <ellipse cx="15" cy="25" rx="5" ry="20" fill="rgba(255,255,255,0.7)" />
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 50">
+									<ellipse
+										cx="50"
+										cy="25"
+										rx="40"
+										ry="20"
+										fill="purple"
+									/>
+									<ellipse
+										cx="15"
+										cy="25"
+										rx="5"
+										ry="20"
+										fill="rgba(255,255,255,0.7)"
+									/>
+								</svg>
+							</div>
+						</div>
+						<aside class="notes">
+							Similar to a circle, but potentially squashed or
+							stretched, is the `&lt;ellipse&gt;`. It also uses
+							`cx` and `cy` for the center point. But instead of a
+							single radius `r`, it has `rx` for the horizontal
+							radius and `ry` for the vertical radius. If `rx` and
+							`ry` are equal, you get a perfect circle! Here we
+							have a wide purple ellipse and a tall, thin
+							white-ish one.
+						</aside>
+					</section>
+
+					<!-- Slide 3.5: Line -->
+					<section>
+						<h2>Shape: <code>&lt;line&gt;</code></h2>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 50">
+                          <line
+                            x1="10" y1="10"
+                            x2="90" y2="40"
+                            stroke="lime"
+                            stroke-width="3" />
+
+                           <line x1="10" y1="40" x2="90" y2="10"
+                                stroke="cyan" stroke-width="2"
+                                stroke-dasharray="5 3" />
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 50">
+									<line
+										x1="10"
+										y1="10"
+										x2="90"
+										y2="40"
+										stroke="lime"
+										stroke-width="3"
+									/>
+									<line
+										x1="10"
+										y1="40"
+										x2="90"
+										y2="10"
+										stroke="cyan"
+										stroke-width="2"
+										stroke-dasharray="5 3"
+									/>
+								</svg>
+							</div>
+						</div>
+						<aside class="notes">
+							Need a straight line? Use `&lt;line&gt;`. This is
+							defined simply by its start point (`x1`, `y1`) and
+							end point (`x2`, `y2`). Note that lines don't have a
+							`fill` property, only `stroke` properties. You can
+							also create dashed lines using the
+							`stroke-dasharray` attribute. You provide a list of
+							numbers representing the length of dashes and gaps.
+							`5 3` means a 5-unit dash followed by a 3-unit gap,
+							repeated along the line. Here: a solid green line
+							and a dashed cyan line.
+						</aside>
+					</section>
+
+					<!-- Slide 3.6: Polyline -->
+					<section>
+						<h2>
+							Shape: <code>&lt;polyline&gt;</code> (Open Shape)
+						</h2>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 50">
+                          <polyline
+                            points="10 10, 30 40, 50 10, 70 40, 90 10"
+                            stroke="yellow"
+                            stroke-width="2"
+                            fill="none" />
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 50">
+									<polyline
+										points="10 10, 30 40, 50 10, 70 40, 90 10"
+										stroke="yellow"
+										stroke-width="2"
+										fill="none"
+									/>
+								</svg>
+								<p>
+									(Connects the dots, doesn't close
+									automatically)
+								</p>
+							</div>
+						</div>
+						<aside class="notes">
+							What if you need multiple connected lines, like a
+							zig-zag? Use `&lt;polyline&gt;`. It takes a `points`
+							attribute containing a list of x,y coordinates,
+							separated by spaces or commas. The browser draws
+							straight lines connecting these points in order.
+							Crucially, a polyline is an *open* shape by default
+							– it doesn't automatically connect the last point
+							back to the first. Because of this, you usually set
+							`fill="none"` unless you want some weird fill
+							effects. This example draws a simple zig-zag line.
+						</aside>
+					</section>
+
+					<!-- Slide 3.7: Polygon -->
+					<section>
+						<h2>
+							Shape: <code>&lt;polygon&gt;</code> (Closed Shape)
+						</h2>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 50">
+                          <polygon
+                             points="50 5, 95 45, 5 45"
+                             stroke="cyan"
+                             stroke-width="2"
+                             fill="rgba(0, 255, 255, 0.5)" />
+
+                          <!-- A simple star -->
+                           <polygon points="75 25, 80 35, 90 35, 82 40, 85 50, 75 45, 65 50, 68 40, 60 35, 70 35"
+                                    fill="gold" stroke="black" stroke-width="0.5"/>
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 50">
+									<polygon
+										points="50 5, 95 45, 5 45"
+										stroke="cyan"
+										stroke-width="2"
+										fill="rgba(0, 255, 255, 0.5)"
+									/>
+									<polygon
+										points="75 25, 80 35, 90 35, 82 40, 85 50, 75 45, 65 50, 68 40, 60 35, 70 35"
+										fill="gold"
+										stroke="black"
+										stroke-width="0.5"
+									/>
+								</svg>
+								<p>(Connects dots AND closes the loop)</p>
+							</div>
+						</div>
+						<aside class="notes">
+							Similar to polyline, `&lt;polygon&gt;` also takes a
+							list of points. The key difference: polygon
+							*automatically* draws a straight line from the last
+							point back to the first point, creating a *closed*
+							shape. This means polygons usually have a `fill`
+							color, as they represent a filled area. Here, the
+							first example creates a triangle. The second uses
+							more points to create a simple star shape.
+						</aside>
+					</section>
+				</section>
+				<!-- End of Section 3 -->
+
+				<!-- == Section 4: Advanced Topics (Quick Overview) == -->
+				<section>
+					<!-- Slide 4.1: Path -->
+					<section>
+						<h2>The All-Powerful <code>&lt;path&gt;</code></h2>
+						<p>
+							The Swiss Army knife of SVG shapes! Can draw
+							anything:
+						</p>
+						<p>
+							Straight lines, Curves (Bézier curves, arcs),
+							Complex shapes
+						</p>
+						<p>
+							Uses a mini-language in the <code>d</code> attribute
+							(<code>d="..."</code> stands for data).
+						</p>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 100">
+                          <path d="
+                            M 10 10
+                            L 90 10
+                            L 50 90
+                            Z
+                          " fill="magenta" />
+
+                          <!-- A simple curve (Quadratic Bézier) -->
+                           <path d="M 10 80 Q 50 30 90 80"
+                                 stroke="lime" stroke-width="2" fill="none" />
+                                 <!-- M=Move, Q=Curve, L=Line, Z=Close -->
+                        </svg>
+                         </code></pre>
+							<div class="visual-side" style="max-height: 400px">
+								<svg viewBox="0 0 100 100">
+									<path
+										d=" M 10 10 L 90 10 L 50 90 Z "
+										fill="magenta"
+									/>
+									<path
+										d="M 10 80 Q 50 30 90 80"
+										stroke="lime"
+										stroke-width="2"
+										fill="none"
+									/>
+								</svg>
+								<p>
+									Commands: M(ove), L(ine), Q(uadratic curve),
+									C(ubic curve), A(rc), Z(close)
+								</p>
+							</div>
+						</div>
+						<aside class="notes">
+							Now, beyond the basic shapes, there's the mighty
+							`&lt;path&gt;` element. This is the most powerful
+							and flexible drawing tool in SVG. You can create
+							literally *any* 2D shape with paths, including
+							straight lines, complex curves (like Bézier curves
+							used in design software), arcs, and combinations of
+							these. It works using a special mini-language inside
+							the `d` attribute (which stands for 'data'). You use
+							commands like `M` (move to a starting point without
+							drawing), `L` (draw a straight line to), `Q` (draw a
+							quadratic Bézier curve), `C` (cubic Bézier), `A`
+							(elliptical arc), and `Z` (close the path by drawing
+							a line back to the start). Uppercase commands use
+							absolute coordinates, lowercase use relative
+							coordinates (relative to the current point).
+							Learning path data takes practice, but it unlocks
+							incredible possibilities! Many design tools export
+							graphics as SVG paths. Here, we draw a simple
+							triangle using Move and Line commands, and a curved
+							line using a Quadratic Bézier command.
+						</aside>
+					</section>
+
+					<!-- Slide 4.2: Grouping -->
+					<section>
+						<h2>Grouping Elements with <code>&lt;g&gt;</code></h2>
+						<p>
+							The <code>&lt;g&gt;</code> tag groups multiple
+							elements together.
+						</p>
+						<ul>
+							<li>Apply styles/transforms to the whole group.</li>
+							<li>Keeps code organized.</li>
+						</ul>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 50">
+                          <!-- Group 1: Blue Square -->
+                          <g fill="blue" stroke="white" stroke-width="1">
+                            <rect x="5" y="5" width="20" height="20"/>
+                            <circle cx="15" cy="15" r="5" fill="lightblue"/>
+                          </g>
+
+                          <!-- Group 2: Rotated Red Square -->
+                          <g transform="translate(70 25) rotate(45)">
+                             <rect x="-10" y="-10" width="20" height="20" fill="red"/>
+                             <circle cx="0" cy="0" r="3" fill="pink"/>
+                          </g>
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 50">
+									<g
+										fill="blue"
+										stroke="white"
+										stroke-width="1"
+									>
+										<rect
+											x="5"
+											y="5"
+											width="20"
+											height="20"
+										/>
+										<circle
+											cx="15"
+											cy="15"
+											r="5"
+											fill="lightblue"
+										/>
+									</g>
+									<g transform="translate(70 25) rotate(45)">
+										<rect
+											x="-10"
+											y="-10"
+											width="20"
+											height="20"
+											fill="red"
+										/>
+										<circle
+											cx="0"
+											cy="0"
+											r="3"
+											fill="pink"
+										/>
+									</g>
+								</svg>
+							</div>
+						</div>
+						<aside class="notes">
+							Use the &lt;g&gt; tag to group SVG elements. This
+							lets you apply styles (like fill) or transforms
+							(like rotate) to the whole group at once. It also
+							helps organize your code. The example shows one
+							group inheriting styles, and another group being
+							moved and rotated together.
+						</aside>
+					</section>
+
+					<!-- Slide 4.3: Transformations -->
+					<section>
+						<h2>Transforming Things!</h2>
+						<p>
+							The <code>transform</code> attribute moves, scales,
+							rotates elements:
+						</p>
+						<ul>
+							<li><code>translate(x, y)</code></li>
+							<li><code>scale(sx, [sy])</code></li>
+							<li><code>rotate(angle, [cx, cy])</code></li>
+							<li>
+								<code>skewX(angle)</code> /
+								<code>skewY(angle)</code>
+							</li>
+							<li>Can chain multiple transforms!</li>
+						</ul>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 50">
+                           <rect x="5" y="5" width="20" height="10" fill="gray" />
+
+                           <!-- Translated -->
+                           <rect x="5" y="5" width="20" height="10" fill="cyan"
+                                 transform="translate(30 0)" />
+
+                           <!-- Scaled & Translated -->
+                           <rect x="5" y="5" width="20" height="10" fill="yellow"
+                                 transform="translate(0 20) scale(1.5)" />
+
+                           <!-- Rotated around its center -->
+                           <rect x="65" y="5" width="20" height="10" fill="lime"
+                                 transform="rotate(30 75 10)" />
+                                 <!-- Rotate 30deg around (75, 10) -->
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 50">
+									<rect
+										x="5"
+										y="5"
+										width="20"
+										height="10"
+										fill="gray"
+									/>
+									<rect
+										x="5"
+										y="5"
+										width="20"
+										height="10"
+										fill="cyan"
+										transform="translate(30 0)"
+									/>
+									<rect
+										x="5"
+										y="5"
+										width="20"
+										height="10"
+										fill="yellow"
+										transform="translate(0 20) scale(1.5)"
+									/>
+									<rect
+										x="65"
+										y="5"
+										width="20"
+										height="10"
+										fill="lime"
+										transform="rotate(30 75 10)"
+									/>
+								</svg>
+							</div>
+						</div>
+						<aside class="notes">
+							The transform attribute applies geometric
+							transformations: translate(x,y) to move, scale(sx,
+							sy) to resize, rotate(angle, cx, cy) to rotate
+							around a point (default is 0,0!), and skewX/skewY to
+							slant. You can chain them, but order matters
+							(right-to-left application). The example shows these
+							functions. Key point: Remember to set the rotation
+							center (cx, cy) if needed!
+						</aside>
+					</section>
+				</section>
+				<!-- End of Section 4 -->
+
+				<!-- == Section 5: Accessibility == -->
+				<section>
+					<!-- Slide 5.1: Intro -->
+					<section>
+						<h2>
+							Accessibility Matters! Making SVG Understandable
+						</h2>
+						<p>
+							Since SVG is code, we can make it accessible to
+							everyone, including users with screen readers.
+						</p>
+						<p>
+							Key elements: <code>&lt;title&gt;</code> and
+							<code>&lt;desc&gt;</code>
+						</p>
+						<aside class="notes">
+							Okay, we've drawn cool stuff, but is it
+							understandable for *everyone*? Accessibility is
+							super important on the web. People using screen
+							readers or other assistive technologies need to know
+							what our graphics represent. Luckily, because SVG is
+							just text/code, we can add information directly into
+							it. The two key tags for this are `&lt;title&gt;`
+							and `&lt;desc&gt;` (description). Let's look at how
+							to use them.
+						</aside>
+					</section>
+
+					<!-- Slide 5.2: Title & Desc -->
+					<section>
+						<h2>
+							Using <code>&lt;title&gt;</code> &
+							<code>&lt;desc&gt;</code>
+						</h2>
+						<p>Provide text alternatives for screen readers.</p>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 50" role="img"
+                             aria-labelledby="chartTitle chartDesc">
+
+                          <!-- Short, meaningful title -->
+                          <title id="chartTitle">Simple Bar Chart</title>
+
+                          <!-- Longer description (optional but good) -->
+                          <desc id="chartDesc">
+                            A bar chart showing values 30 and 45.
+                            The first bar is blue, the second is green.
+                          </desc>
+
+                          <!-- The actual chart graphics -->
+                          <rect x="10" y="20" width="30" height="30" fill="blue" />
+                          <rect x="60" y="5" width="30" height="45" fill="green" />
+
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg
+									viewBox="0 0 100 50"
+									role="img"
+									aria-labelledby="chartTitle-demo chartDesc-demo"
+								>
+									<title id="chartTitle-demo">
+										Simple Bar Chart
+									</title>
+									<desc id="chartDesc-demo">
+										A bar chart showing values 30 and 45.
+										The first bar is blue, the second is
+										green.
+									</desc>
+									<rect
+										x="10"
+										y="20"
+										width="30"
+										height="30"
+										fill="blue"
+									/>
+									<rect
+										x="60"
+										y="5"
+										width="30"
+										height="45"
+										fill="green"
+									/>
+								</svg>
+								<p>
+									(Screen reader announces: "Simple Bar Chart.
+									A bar chart showing values 30 and 45...")
+								</p>
+							</div>
+						</div>
+						<aside class="notes">
+							Inside your `&lt;svg&gt;` tag, you should add
+							`&lt;title&gt;` and optionally `&lt;desc&gt;`
+							elements right at the beginning. The `&lt;title&gt;`
+							should provide a concise, descriptive name for the
+							SVG, similar to the `alt` text on an `&lt;img&gt;`
+							tag. The `&lt;desc&gt;` (description) allows for a
+							more detailed explanation if the graphic is complex,
+							like a chart or diagram. It's best practice to give
+							these elements `id` attributes (like
+							`id="chartTitle"`) and then reference these IDs in
+							an `aria-labelledby` attribute on the main
+							`&lt;svg&gt;` tag. Also, add `role="img"` to the
+							`&lt;svg&gt;` tag to explicitly tell assistive
+							technologies that this is an image. This way, a
+							screen reader will announce the title and
+							description, making the content accessible. For
+							purely decorative SVGs, you might omit title/desc
+							and use `aria-hidden="true"`.
+						</aside>
+					</section>
+
+					<!-- Slide 5.3: Accessibility for Icons -->
+					<section>
+						<h2>Accessibility for Icons</h2>
+						<p>Common scenarios:</p>
+						<ul>
+							<li>
+								<strong>Meaningful Icon:</strong> Use
+								<code>&lt;title&gt;</code>.
+							</li>
+							<li>
+								<strong>Decorative Icon:</strong> Use
+								<code>aria-hidden="true"</code>.
+							</li>
+							<li>
+								<strong>Icon Button (No Text):</strong> Use
+								<code>aria-label</code> on button.
+							</li>
+							<li>
+								<strong>Icon Link (With Text):</strong> Icon
+								usually <code>aria-hidden="true"</code>.
+							</li>
+						</ul>
+						<pre
+							class="fragment"
+							style="font-size: 0.6em"
+						><code data-trim class="html">
+                        <!-- 1. Meaningful Icon -->
+                        <svg role="img" focusable="false" ...> <title>Settings</title> <use xlink:href="#icon-settings" /> </svg>
+
+                        <!-- 2. Decorative Icon -->
+                        <svg aria-hidden="true" focusable="false" ...> <use xlink:href="#icon-sparkle" /> </svg> <span>Welcome!</span>
+
+                        <!-- 3. Icon Button (No Text) -->
+                        <button aria-label="Search">
+                          <svg aria-hidden="true" focusable="false" ...> <use xlink:href="#icon-search" /> </svg>
+                        </button>
+
+                        <!-- 4. Icon Link (With Text) -->
+                        <a href="/profile">
+                          <svg aria-hidden="true" focusable="false" ...> <use xlink:href="#icon-user" /> </svg>
+                          My Profile
+                        </a>
+                    </code></pre>
+						<aside class="notes">
+							Icons are a very common use case for SVG. How do we
+							make them accessible? For meaningful icons: Need
+							&lt;title&gt; & role="img". For decorative icons:
+							Use aria-hidden="true". For Icon-Only Button/Link:
+							Icon aria-hidden, but button/link needs aria-label.
+							For icon with text: Icon usually aria-hidden; text
+							provides context. Always test!
+						</aside>
+					</section>
+				</section>
+				<!-- End of Section 5 -->
+
+				<!-- == Section 6: Animations == -->
+				<section>
+					<!-- Slide 6.1: Intro -->
+					<section>
+						<h2>Bringing SVG to Life: Animations! 🎬</h2>
+						<p>Yes, you can animate SVG!</p>
+						<p>Three main ways:</p>
+						<ol>
+							<li>
+								<strong>CSS Animations / Transitions</strong>
+							</li>
+							<li>
+								<strong>SMIL</strong> (Native SVG Animation)
+							</li>
+							<li>
+								<strong>JavaScript</strong> (Libraries help!)
+							</li>
+						</ol>
+						<aside class="notes">
+							Static graphics are cool, but animated graphics?
+							Even cooler! And yes, SVG is highly animatable.
+							Three main ways: CSS: Use familiar @keyframes &
+							transitions. Often simplest & performant. SMIL:
+							Native SVG tags like &lt;animate&gt;.
+							Self-contained, powerful, but verbose. JavaScript:
+							Ultimate control, especially with libraries (GSAP,
+							Snap.svg, etc.). Best for complex interactions.
+						</aside>
+					</section>
+
+					<!-- Slide 6.2: CSS Animation -->
+					<section>
+						<h2>
+							Animation: CSS <code>@keyframes</code> /
+							<code>transition</code>
+						</h2>
+						<p>
+							Animate SVG properties like <code>fill</code>,
+							<code>transform</code>, etc.
+						</p>
+						<div class="code-side">
+							<pre><code data-trim class="css">
+                        /* CSS */
+                        .pulsing-circle {
+                          transition: fill 0.5s ease-in-out;
+                        }
+                        .pulsing-circle:hover {
+                          fill: lightcoral;
+                        }
+
+                        @keyframes pulse-color-and-scale {
+                          0% { fill: teal; transform: scale(1); }
+                          50% { fill: tomato; transform: scale(1.2); }
+                          100% { fill: teal; transform: scale(1); }
+                        }
+
+                        .animated-circle {
+                           animation: pulse-color-and-scale 4s infinite ease-in-out;
+                           transform-origin: center;
+                           transform-box: fill-box;
+                        }
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 50">
+									<style>
+										.pulsing-circle-demo {
+											transition: fill 0.5s ease-in-out;
+											cursor: pointer;
+										}
+										.pulsing-circle-demo:hover {
+											fill: lightcoral;
+										}
+										@keyframes pulse-color-and-scale-demo {
+											0% {
+												fill: teal;
+												transform: scale(1);
+											}
+											50% {
+												fill: tomato;
+												transform: scale(1.2);
+											}
+											100% {
+												fill: teal;
+												transform: scale(1);
+											}
+										}
+										.animated-circle-demo {
+											animation: pulse-color-and-scale-demo
+												4s infinite ease-in-out;
+											transform-origin: center;
+											transform-box: fill-box;
+										}
+									</style>
+									<circle
+										cx="25"
+										cy="25"
+										r="15"
+										fill="steelblue"
+										class="pulsing-circle-demo"
+									/>
+									<circle
+										cx="75"
+										cy="25"
+										r="15"
+										class="animated-circle-demo"
+									/>
+								</svg>
+								<p>
+									(Left: Hover Transition. Right: Keyframe
+									Animation)
+								</p>
+							</div>
+						</div>
+						<aside class="notes">
+							Use CSS transition for simple interactions like
+							hover effects. Use @keyframes and the animation
+							property for more complex, looping animations.
+							Example shows both: hover transition and a keyframe
+							animation pulsing color & scale.
+						</aside>
+					</section>
+
+					<!-- Slide 6.3: SMIL Animation -->
+					<section>
+						<h2>Animation: SMIL (Native SVG)</h2>
+						<p>
+							Uses animation elements directly inside SVG (e.g.,
+							<code>&lt;animate&gt;</code>).
+						</p>
+						<div class="code-side">
+							<pre><code data-trim class="xml">
+                        <svg viewBox="0 0 100 50">
+                          <rect x="10" y="10" width="30" height="30" fill="blue">
+                            <!-- Animate the 'fill' attribute -->
+                            <animate
+                              attributeName="fill"
+                              values="blue; cyan; blue"
+                              dur="3s"          
+                              repeatCount="indefinite" />
+                          </rect>
+
+                          <circle cx="70" cy="25" r="15" fill="red">
+                            <!-- Animate the 'cx' attribute (position) -->
+                            <animate
+                               attributeName="cx"
+                               values="70; 80; 70"
+                               dur="2s"
+                               repeatCount="indefinite" />
+                          </circle>
+                        </svg>
+                        </code></pre>
+							<div class="visual-side">
+								<svg viewBox="0 0 100 50">
+									<rect
+										x="10"
+										y="10"
+										width="30"
+										height="30"
+										fill="blue"
+									>
+										<animate
+											attributeName="fill"
+											values="blue; cyan; blue"
+											dur="3s"
+											repeatCount="indefinite"
+										/>
+									</rect>
+									<circle cx="70" cy="25" r="15" fill="red">
+										<animate
+											attributeName="cx"
+											values="70; 80; 70"
+											dur="2s"
+											repeatCount="indefinite"
+										/>
+									</circle>
+								</svg>
+								<p>(Animation defined within the SVG itself)</p>
+							</div>
+						</div>
+						<aside class="notes">
+							SMIL uses tags like &lt;animate&gt; inside the SVG.
+							Key attributes: attributeName, values, dur,
+							repeatCount. Pros: Self-contained. Cons: Clunky
+							syntax, harder debugging than CSS. Example shows
+							animating fill on a rectangle and cx (position) on a
+							circle.
+						</aside>
+					</section>
+
+					<!-- Slide 6.4: JavaScript Animation -->
+					<section>
+						<h2>Animation: JavaScript</h2>
+						<p>
+							Use JS for complex interactions, physics, or
+							chaining animations.
+						</p>
+						<p>Libraries make it MUCH easier:</p>
+						<ul>
+							<li><strong>GSAP (GreenSock)</strong></li>
+							<li><strong>Snap.svg</strong></li>
+							<li><strong>SVG.js</strong></li>
+							<li><strong>D3.js</strong></li>
+							<li>(And others...)</li>
+						</ul>
+						<p class="fragment" style="margin-top: 20px">
+							<em
+								>(Code examples are too complex for a quick
+								slide)</em
+							>
+						</p>
+						<aside class="notes">
+							JavaScript offers the most control, perfect for
+							interactivity, physics, or complex sequences.
+							Vanilla JS is possible but often complex. Libraries
+							like GSAP, Snap.svg, SVG.js, and D3.js are highly
+							recommended to simplify animation tasks.
+						</aside>
+					</section>
+				</section>
+				<!-- End of Section 6 -->
+
+				<!-- == Section 7: Conclusion == -->
+				<section>
+					<!-- Slide 7.1: Conclusion -->
+					<section>
+						<h2>SVG: Your Web Graphics Superpower!</h2>
+						<p>So, remember:</p>
+						<ul>
+							<li>✨ Sharp graphics at any size</li>
+							<li>⚙️ Controllable with CSS & JS</li>
+							<li>♿️ Make it Accessible</li>
+							<li>🎉 Animate it!</li>
+							<li>
+								🔧 Use it for logos, icons, illustrations,
+								charts...
+							</li>
+						</ul>
+						<p style="margin-top: 30px">Go forth and vectorize!</p>
+						<aside class="notes">
+							So, let's quickly recap the superpowers SVG gives
+							us. It delivers perfectly sharp graphics no matter
+							the screen size or zoom level because it's
+							vector-based. It plays incredibly well with other
+							web technologies like CSS for styling and JavaScript
+							for interactivity and complex animations. We can
+							(and should!) make our SVGs accessible using title
+							and description elements. We can bring them to life
+							with various animation techniques. It's the perfect
+							tool for so many common web graphics needs – logos,
+							icons, illustrations, data visualizations, and more.
+							Hopefully, you now have a better understanding of
+							what SVG is and why it's such a valuable part of the
+							modern web developer's toolkit.
+						</aside>
+					</section>
+
+					<!-- Slide 7.2: Thank You -->
+					<section>
+						<h2>Thank You!</h2>
+						<p style="margin-top: 50px">
+							<a
+								href="https://github.com/Zilusion"
+								target="_blank"
+								>Sudorgin Daniil</a
+							>
+							<br />
+						</p>
+						<aside class="notes">
+							That brings me to the end of my presentation. Thank
+							you all for listening! I hope this overview has
+							sparked your interest in using SVG more in your
+							projects.
+						</aside>
+					</section>
+				</section>
+				<!-- End of section 7 -->
 			</div>
+			<!-- .slides -->
 		</div>
+		<!-- .reveal -->
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
+		<script src="./dist/reveal.js"></script>
+		<script src="./plugin/notes/notes.js"></script>
+		<script src="./plugin/markdown/markdown.js"></script>
+		<script src="./plugin/highlight/highlight.js"></script>
 		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
 			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
 				hash: true,
-
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [RevealHighlight, RevealNotes, RevealMarkdown],
 			});
 		</script>
 	</body>

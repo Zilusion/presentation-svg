@@ -1,0 +1,36 @@
+/* Файл: css/custom.css */
+
+/* Анимация для примера на слайде CSS Animations */
+@keyframes pulse-color-and-scale {
+	0% {
+		fill: teal;
+		transform: scale(1);
+	}
+	50% {
+		fill: tomato;
+		transform: scale(1.2);
+	}
+	100% {
+		fill: teal;
+		transform: scale(1);
+	}
+}
+
+.animated-circle {
+	animation: pulse-color-and-scale 4s infinite ease-in-out;
+	/* Указываем центр трансформации - важно! */
+	transform-origin: center;
+	/* Контекст трансформации - важно! */
+	transform-box: fill-box;
+}
+
+/* Пример transition для круга на том же слайде */
+.pulsing-circle {
+	transition: fill 0.5s ease-in-out;
+	cursor: pointer; /* Показать что можно кликнуть/навести */
+}
+.pulsing-circle:hover {
+	fill: lightcoral;
+}
+
+/* Можешь добавить другие стили сюда */
